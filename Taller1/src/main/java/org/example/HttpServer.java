@@ -2,7 +2,10 @@ package org.example;
 
 import java.net.*;
 import java.io.*;
-
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 public class HttpServer {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = null;
@@ -33,16 +36,19 @@ public class HttpServer {
                 break;
             }
         }
-        outputLine = "<!DOCTYPE html>"
-                + "<html>"
-                + "<head>"
-                + "<meta charset=\"UTF-8\">"
-                + "<title>Title of the document</title>\n"
-                + "</head>"
-                + "<body>"
-                + "My Web Site"
-                + "</body>"
-                + "</html>" + inputLine;
+        outputLine = "";
+        Path file = Paths.get("src/main/resources/index.html");
+        System.out.println(file);
+        try (InputStream in2 = Files.newInputStream(file);
+             BufferedReader reader =
+                     new BufferedReader(new InputStreamReader(in2))) {
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                outputLine += line;
+            }
+        } catch (NoSuchFileException x) {
+            } catch (IOException e) {
+        }
         out.println(outputLine);
 
         out.close();
