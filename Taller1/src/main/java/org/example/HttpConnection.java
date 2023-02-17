@@ -1,20 +1,26 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+ import java.io.BufferedReader;
+ import java.io.IOException;
+ import java.io.InputStreamReader;
+ import java.net.HttpURLConnection;
+ import java.net.URL;
 
 public class HttpConnection {
 
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static final String GET_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=925c120b";
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * Metodo encargado de la conexion HTTP y consulta el API segun el URL como parametro de entrada en el encabezado del metodo
+     * @paramURL
+     * @return
+     * @throws IOException
+     */
+    public static String getAPI( ) throws IOException {
 
-        URL obj = new URL(GET_URL);
+
+        URL obj = new URL("http://www.omdbapi.com/?i=tt3896198&apikey=925c120b");
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);
@@ -35,11 +41,14 @@ public class HttpConnection {
             in.close();
 
             // print result
-            System.out.println(response.toString());
+            return response.toString();
         } else {
             System.out.println("GET request not worked");
         }
         System.out.println("GET DONE");
+        return "GET DONE";
     }
+
+
 
 }

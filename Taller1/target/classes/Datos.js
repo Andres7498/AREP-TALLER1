@@ -1,7 +1,7 @@
-function getData() {
+function loadGetMsg() {
     let vector_result = {};
-    var word_share_traded = document.getElementById("word_share_traded").value;
-    let time_series = "" ;
+    var movies = document.getElementById("movies").value;
+    let names_movies = "" ;
     document.getElementByName("Time_Series_Daily").checked ? time_series = "TIME_SERIES_DAILY" : "";
     fetch('http://www.omdbapi.com/?i=tt3896198&apikey=925c120b')
         .then(results => results.json()).then(data => vector_result = data).then(data => {
