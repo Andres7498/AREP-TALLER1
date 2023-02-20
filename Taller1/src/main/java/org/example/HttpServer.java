@@ -79,17 +79,33 @@ public class HttpServer {
                 "        <div id=\"getrespmsg\"></div>\n" +
                 "\n" +
                 "        <script>\n" +
-                "            function loadGetMsg() {\n" +
-                "                let nameVar = document.getElementById(\"name\").value;\n" +
-                "                const xhttp = new XMLHttpRequest();\n" +
-                "                xhttp.onload = function() {\n" +
-                "                    document.getElementById(\"getrespmsg\").innerHTML =\n" +
-                "                    this.responseText;\n" +
-                "                }\n" +
-                "                xhttp.open(\"GET\", \"https://www.omdbapi.com/?t=\"+nameVar+\"&apikey=925c120b\");\n" +
-                "                xhttp.send();\n" +
-                "            }\n" +
+                "             function loadGetMsg() { \n" +
+                "    console.log(\"ANDREEEEEEEEEEEEEEEEEEEEEEE\"); \n" +
+                "    let vector_result = {}; \n" +
+                "    let nameVar = document.getElementById(\"name\").value; \n" +
+                "    fetch(\"https://www.omdbapi.com/?t=\"+nameVar+\"&apikey=925c120b\")\n" +
+                "        .then(results => results.json()).then(data => vector_result = data).then(data => { \n" +
+                "        var jsonStr = JSON.stringify(data, null, 4); \n" +
+                "        const table_elements = document.querySelector('#table_elements') \n" +
+                "        delete data ['Meta Data']; \n" +
+                "        table_elements.innerHTML = jsonStr; \n" +
+                "    })\n" +
+                "}\n" +
                 "        </script>\n" +
+                "\n" +
+                "        <h1>Form with POST</h1>\n" +
+                "        <form action=\"/hellopost\">\n" +
+                "            <label for=\"postname\">Name:</label><br>\n" +
+                "            <input type=\"text\" id=\"postname\" name=\"name\" value=\"John\"><br><br>\n" +
+                "            <input type=\"button\" value=\"Submit\" onclick=\"loadPostMsg(postname)\">\n" +
+                "        </form>\n" +
+                "        \n" +
+                "        <div id=\"postrespmsg\"></div>\n" +
+                "        \n" +
+                "       < table cellspacing = \"4\" width = \"90%\" >\n" +
+                "         <pre id = \"table_elements\" >\n" +
+                "       </pre >\n" +
+                "      </table >\n" +
                 "    </body>\n" +
                 "</html>";
     }
